@@ -18,12 +18,9 @@ class disjoint_set  // for implementing disjoint_set
         return find(parent[u],parent);
     }
 
-    void unionByWeight(int u, int v, vector<int> &parent) // it make the union if elements belog to differnet parents
+    void unionByWeight(int pu, int pv, vector<int> &parent) // it make the union if elements belog to differnet parents
     {
-        int pu = find(u, parent), pv = find(v, parent);
-
-        if(pu!=pv)
-        {
+        
             if(parent[pu]<parent[pv])
             {
                 parent[pu]+=parent[pv];
@@ -34,7 +31,6 @@ class disjoint_set  // for implementing disjoint_set
                 parent[pv] += parent[pu];
                 parent[pu] = pv;
             }
-        }
     }
 };
 
@@ -92,7 +88,7 @@ class Graph
             if(ps!=pd) // if parent of both are not same then we cann add it to spanning tree as it will not form a cycle 
             {   
                 res.push_back(table[i]); // adding that edge to our spanning tree
-                ob.unionByWeight(s,d,parent); // making a union so that this new becomes a single tree
+                ob.unionByWeight(ps,pd,parent); // making a union so that this new becomes a single tree
                 sum+=w; // adding the wieghts
             }
         }
